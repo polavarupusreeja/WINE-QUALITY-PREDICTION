@@ -3,6 +3,11 @@ import pandas as pd
 import numpy as np
 import pickle
 import time
+with open("model.pkl", "rb") as f:
+    model = pickle.load(f)
+
+with open("scaler.pkl", "rb") as f:
+    scaler = pickle.load(f)
 
 # ------------------------------
 # Page configuration
@@ -104,15 +109,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# ------------------------------
-# Load saved model & scaler
-# ------------------------------
-try:
-    scaler = pickle.load(open("scaler_model.sav", "rb"))
-    model = pickle.load(open("finalized_RFmodel.sav", "rb"))
-except FileNotFoundError:
-    st.error("❌ Model files not found.")
 
 # ------------------------------
 # Title
@@ -238,3 +234,4 @@ if st.button("Predict Wine Quality 🍷"):
 
 st.divider()
 st.caption("Made with ❤️ using Streamlit & Machine Learning")
+
